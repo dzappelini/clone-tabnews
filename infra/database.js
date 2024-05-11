@@ -1,10 +1,10 @@
 import { Client } from "pg";
 
-// const fs = require("fs");
-const sslCA = Buffer.from(
-  process.env.POSTGRES_SSL_CA_BASE64,
-  "base64",
-).toString("utf-8");
+// for use with aiven.io
+// const sslCA = Buffer.from(
+//   process.env.POSTGRES_SSL_CA_BASE64,
+//   "base64",
+// ).toString("utf-8");
 
 async function query(queryObject) {
   const client = new Client({
@@ -13,10 +13,13 @@ async function query(queryObject) {
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: {
-      rejectUnauthorized: true,
-      ca: sslCA,
-    },
+    ssl: process.env.NODE_ENV === "development" ? false : true,
+
+    // for use with aiven.io
+    // ssl: {
+    //   rejectUnauthorized: true,
+    //   ca: sslCA,
+    // },
   });
 
   try {

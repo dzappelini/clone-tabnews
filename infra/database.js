@@ -14,7 +14,7 @@ async function query(queryObject) {
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
     ssl: getSSLValues(),
-    // ssl: process.env.NODE_ENV === "development" ? true : true,
+    // ssl: process.env.NODE_ENV === "development" ? false : true,
 
     // for use with aiven.io
     // ssl: {
@@ -45,5 +45,5 @@ function getSSLValues() {
       ca: process.env.POSTGRES_CA,
     };
   }
-  return process.env.NODE_ENV === "development" ? true : true;
+  return process.env.NODE_ENV === "development" ? false : true;
 }

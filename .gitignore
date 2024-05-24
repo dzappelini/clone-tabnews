@@ -1,5 +1,3 @@
 .next
 node_modules
 .env.development
-ca.pem
-ca-certificate.crt
